@@ -15,7 +15,11 @@
 }
 
 .App-header {
-  background-image: url("rain.gif");
+  background: url("wr.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   height: 13vh;
   display: flex;
   flex-direction: column;

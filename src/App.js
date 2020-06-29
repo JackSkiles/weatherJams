@@ -29,13 +29,10 @@ class App extends React.Component {
   render(){
       return (
         <div className="App">
-            <header className="App-header">
-              <h1>Heavy Weather</h1>
-            </header>
-            <div style={{height: '100vh', display: 'flex', justifyContent: 'center',
+            <div style={{height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center',
             backgroundImage: this.state.background, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'
             }}>
-            <div style={{width: '30%', height: '30vh', backgroundColor: 'white', marginTop: '10px', borderRadius: '7px'}}>
+            <div style={{width: '30%', height: '35vh', backgroundColor: 'white', marginTop: '10px', borderRadius: '7px'}}>
               <Weather handleSubmit={(e, state) => {
                 this.weatherGet(state)
               }}/>
