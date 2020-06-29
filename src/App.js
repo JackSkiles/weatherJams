@@ -8,8 +8,8 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            weather: {},
-            background: ""
+            weather: "",
+            background: "url(./Clear.gif)"
         }
     }
 
@@ -18,18 +18,24 @@ class App extends React.Component {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                this.setState({weather: data.weather[0].main, background: `url(./${data.weather[0].main}.jpg)`})
+                if(data.cod === "404"){
+                  alert('Please enter valid location');
+                } else {
+                this.setState({weather: data.weather[0].main, background: `url(./${data.weather[0].main}.gif)`})
+                }
             })
     }
+    
   render(){
       return (
-        <div style={{height: '100vh', backgroundImage: this.state.background}}>
-          <div className="App">
+        <div className="App">
             <header className="App-header">
               <h1>Heavy Weather</h1>
             </header>
-            <div>
-              <h2>Current weather: </h2>
+            <div style={{height: '100vh', display: 'flex', justifyContent: 'center',
+            backgroundImage: this.state.background, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'
+            }}>
+            <div style={{width: '30%', height: '30vh', backgroundColor: 'white', marginTop: '10px', borderRadius: '7px'}}>
               <Weather handleSubmit={(e, state) => {
                 this.weatherGet(state)
               }}/>

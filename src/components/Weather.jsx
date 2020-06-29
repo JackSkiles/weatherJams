@@ -24,8 +24,11 @@ export default class Weather extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
+                    <h3>City:</h3>
                     <input type="text" value={this.state.city} name="city" onChange={this.handleChange}></input>
-                    <input type="text" value={this.state.state} name="state" onChange={this.handleChange}></input>
+                    <h3>State:</h3>
+                    <input type="text" value={this.state.state} name="state" maxLength="2" onChange={this.handleChange}></input>
+                    <h3>Country:</h3>
                     <input type="text" value={this.state.country} name="country" onChange={this.handleChange}></input>
                     <button type="submit">Submit</button>
                 </form>
