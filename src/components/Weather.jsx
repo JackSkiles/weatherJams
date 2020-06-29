@@ -6,9 +6,9 @@ export default class Weather extends Component {
         super(props);
 
         this.state = {
-            city: "",
-            state: "",
-            country: ""
+            city: "Atlanta",
+            state: "GA",
+            country: "US"
         }
     }
 
