@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios';
 
 export default class Weather extends Component {
     constructor(props) {
@@ -6,23 +7,27 @@ export default class Weather extends Component {
 
         this.state = {
             city: "",
+            state: "",
+            country: ""
         }
     }
 
-    onChange = (e) => {
-        this.setState({city: e.target.value});
+    handleChange = (e) => {
+        this.setState({[e.target.name]: e.target.value});
     }
 
-    weatherGet = (e) => {
+    handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state.city)
+        this.props.handleSubmit(e, this.state)
     }
     render() {
         return (
             <div>
-                <form onSubmit={this.weatherGet}>
-                    <input type="text" defaultValue="Enter your city" onChange={this.onChange}></input>
-                    <button type="onSubmit">Submit</button>
+                <form onSubmit={this.handleSubmit}>
+                    <input type="text" value={this.state.city} name="city" onChange={this.handleChange}></input>
+                    <input type="text" value={this.state.state} name="state" onChange={this.handleChange}></input>
+                    <input type="text" value={this.state.country} name="country" onChange={this.handleChange}></input>
+                    <button type="submit">Submit</button>
                 </form>
             </div>
         )
