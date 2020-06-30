@@ -29,6 +29,19 @@ class App extends React.Component {
       })
   }
 
+  getSong = (e) => {
+    console.log("Hello")
+    if (this.state.weather === "Clouds"){
+      let num = 0;
+      while (num < 10){
+        const randomNum = Math.floor(Math.random() * 3135556);
+        console.log(randomNum);
+        num++
+      }
+      fetch(`https://api.deezer.com/aa6dd1a30087eba6aba15aa1c92630b8/track/3135556`)
+    }
+  }
+
   render() {
     return (
       <Router>
@@ -45,6 +58,7 @@ class App extends React.Component {
                 <Weather handleSubmit={(e, state) => {
                   this.weatherGet(state)
                 }} />
+                <button onClick={this.getSong}>Get Songs</button>
               </div>
             </Route>
           </Switch>

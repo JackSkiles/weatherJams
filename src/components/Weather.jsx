@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import { Link } from "react-router-dom";
+import { SongList } from "react-router-dom";
 
 export default class Weather extends Component {
     constructor(props) {
@@ -8,7 +10,8 @@ export default class Weather extends Component {
         this.state = {
             city: "Atlanta",
             state: "GA",
-            country: "US"
+            country: "US",
+            songs: [],
         }
     }
 
