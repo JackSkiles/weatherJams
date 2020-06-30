@@ -65,8 +65,12 @@ class App extends React.Component {
       .then((response) => {
         console.log(response)
         if (response) {
+          console.log(response)
+          const url = response.playlists.items[2].uri;
+          const uri = url.slice(17, url.length);
+          console.log(uri)
           this.setState({
-            categories: response.playlists.items[5]
+            categories: `https://open.spotify.com/embed/playlist/${uri}`
           })
         } else {
           this.setState({
@@ -97,10 +101,13 @@ class App extends React.Component {
                   <button onClick={() => this.getNowPlaying()}>
                     Check Now Playing
                   </button>
-                  <audio controls>
-                    <source src={ this.state.categories } />
-                  </audio>{/* <h1>{ this.state.categories }</h1> */}
+                  {/* <h1>{ this.state.categories }</h1> */}
                   <Link to="/SongList"><h3>To Songlist</h3></Link>
+                </div>
+                <div>
+                  <iframe src={this.state.categories}
+                  width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media">
+                  </iframe>
                 </div>
               </Route>
             </Switch>
