@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Weather from "./components/Weather";
 import SongList from "./components/SongList"
-import {Link} from "react-router-dom" 
+import { Link } from "react-router-dom"
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Spotify from 'spotify-web-api-js'
 
@@ -17,12 +17,9 @@ class App extends React.Component {
       weather: "",
       background: "url(./Clear.gif)",
       loggedInt: params.access_token ? true : false,
-      nowPlaying: {
-        name: 'Not Checked',
-        image: ''
-      }
+      categories: []
     }
-    if (params.access_token){
+    if (params.access_token) {
       spotifyWebApi.setAccessToken(params.access_token)
     }
   }
@@ -30,13 +27,13 @@ class App extends React.Component {
   getHashParams() {
     var hashParams = {};
     var e, r = /([^&;=]+)=?([^&;]*)/g,
-        q = window.location.hash.substring(1);
-    while ( e = r.exec(q)) {
-       hashParams[e[1]] = decodeURIComponent(e[2]);
+      q = window.location.hash.substring(1);
+    while (e = r.exec(q)) {
+      hashParams[e[1]] = decodeURIComponent(e[2]);
     }
     return hashParams;
   }
-  
+
   weatherGet = (state) => {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${state.city},${state.state},${state.country}&appid=c6009635b8482d222193df4508ba690a`)
       .then(res => res.json())
@@ -52,9 +49,9 @@ class App extends React.Component {
 
   getSong = (e) => {
     console.log("Hello")
-    if (this.state.weather === "Clouds"){
+    if (this.state.weather === "Clouds") {
       let num = 0;
-      while (num < 10){
+      while (num < 10) {
         const randomNum = Math.floor(Math.random() * 3135556);
         console.log(randomNum);
         num++
@@ -63,51 +60,56 @@ class App extends React.Component {
     }
   }
 
-  getNowPlaying(){
-    spotifyWebApi.getMyCurrentPlaybackState()
-    .then((response) => {
-      console.log("Hello")
-      this.setState({
-        nowPlaying: {
-          name: response.item.name,
-          image: response.item.album.images[0].url
+  getNowPlaying() {
+    spotifyWebApi.getCategoryPlaylists("country")
+      .then((response) => {
+        console.log(response)
+        if (response) {
+          this.setState({
+            categories: response.playlists.items[5]
+          })
+        } else {
+          this.setState({
+            categories: 'nothing'
+          });
         }
       })
-    })
   }
 
   render() {
     return (
       <Router>
-      <Route path="/SongList"></Route>
-      <Link to="/SongList"></Link>
-      <div className="App">
-        <div style={{
-          height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center',
-          backgroundImage: this.state.background, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'
-        }}>
-          <Switch>
-            <Route path="/" exact>
-              <div style={{ width: '30%', height: '35vh', backgroundColor: 'white', marginTop: '10px', borderRadius: '7px' }}>
-                <Weather handleSubmit={(e, state) => {
-                  this.weatherGet(state)
-                }} />
-              <a href='http://localhost:8888'>
-                <button>Login With Spotify</button>
-              </a>
-              <div> Now Playing: {this.state.nowPlaying.name }</div>
-              <div>
-                <img src={ this.state.nowPlaying.image } style={{width: 100}}/>
-              </div>
-              <button onClick={() => this.getNowPlaying()}>
-                Check Now Playing
-              </button>
-              </div>
+        <div className="App">
+          <div style={{
+            height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center',
+            backgroundImage: this.state.background, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'
+          }}>
+            <Switch>
+              <Route path="/" exact>
+                <div style={{ width: '30%', height: '35vh', backgroundColor: 'white', marginTop: '10px', borderRadius: '7px' }}>
+                  <Weather handleSubmit={(e, state) => {
+                    this.weatherGet(state)
+                  }} />
+
+                  <a href='http://localhost:8888'>
+                    <button>Login With Spotify</button>
+                  </a>
+                  <button onClick={() => this.getNowPlaying()}>
+                    Check Now Playing
+                  </button>
+                  <audio controls>
+                    <source src={ this.state.categories } />
+                  </audio>{/* <h1>{ this.state.categories }</h1> */}
+                  <Link to="/SongList"><h3>To Songlist</h3></Link>
+                </div>
+              </Route>
+            </Switch>
+            <Route path="/SongList">
+              <SongList />
             </Route>
-          </Switch>
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
     );
   }
 }
