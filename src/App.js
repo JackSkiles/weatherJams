@@ -70,11 +70,16 @@ class App extends React.Component {
           }}>
             <Switch>
               <Route path="/" exact>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '30%', height: '35vh', backgroundColor: 'white', marginTop: '10px', borderRadius: '7px' }}>
+                <div className="card">
+                  <div>
+                    <Weather handleSubmit={(e, state) => {
+                      this.weatherGet(state)
+                    }} />
                   <div>
                     <a href='http://localhost:8888'>
                       <button>Login With Spotify</button>
                     </a>
+                  </div>
                   </div>
                   {/* <h1>{ this.state.categories }</h1> */}
                   <div>
@@ -82,15 +87,10 @@ class App extends React.Component {
                   </div>
                 </div>
               </Route>
+              <Route path="/SongList">
+                <SongList />
+              </Route>
             </Switch>
-            <Route path="/SongList">
-              <div style={{ display: 'flex', display: 'column', alignItems: 'center', justifyContent: 'center', width: '30%', height: '35vh', backgroundColor: 'white', marginTop: '10px', borderRadius: '7px' }}>
-                <Weather handleSubmit={(e, state) => {
-                  this.weatherGet(state)
-                }} />
-              </div>
-              <SongList />
-            </Route>
           </div>
         </div>
       </Router>

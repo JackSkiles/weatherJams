@@ -33,6 +33,17 @@
   color: #61dafb;
 }
 
+.card { 
+  display: 'flex';
+  align-items: 'center'; 
+  justify-content: 'center';
+  width: '30%';
+  height: '35vh';
+  background-color: 'white';
+  margin-top: '10px'; 
+  border-radius: '7px';
+ }
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
