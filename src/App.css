@@ -15,18 +15,16 @@
 }
 
 .App-header {
-  background: url("wr.jpg") no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 13vh;
+  background-color: #d6d6d6;
   display: flex;
-  flex-direction: column;
+  justify-content: space-around; 
   align-items: center;
-  justify-content: center;
+  height: 8vh;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {

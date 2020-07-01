@@ -111,18 +111,18 @@ class App extends React.Component {
         break;
       default:
         this.getPlaylist("pop")
-      }
     }
-    
-    newPlaylist = () => {
-      this.playlistGet();
-    }
+  }
+
+  newPlaylist = () => {
+    this.playlistGet();
+  }
   changeWeather = () => {
     const visible = this.state.visible
-    if(visible === 'visible'){
+    if (visible === 'visible') {
       return null;
     } else {
-      this.setState({visible: 'visible'})
+      this.setState({ visible: 'visible' })
     }
   }
 
@@ -131,12 +131,12 @@ class App extends React.Component {
     return (
       <Router>
         <div className="App">
-          <div style={{
-            height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center',
-            backgroundImage: `url(../${this.props.background})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'
-          }}>
-            <Switch>
-              <Route path="/" exact>
+          <Switch>
+            <Route path="/" exact>
+              <div style={{
+                height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center',
+                backgroundImage: `url(../${this.props.background})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'
+              }}>
                 <div className="card">
                   <div>
                     <a href='http://localhost:8888'>
@@ -144,22 +144,36 @@ class App extends React.Component {
                     </a>
                   </div>
                 </div>
-                {/* <h1>{ this.state.categories }</h1> */}
-              </Route>
-              <Route path="/SongList">
-                <div style={{display: 'flex', flexDirection: 'column'}}>
+              </div>
+              {/* <h1>{ this.state.categories }</h1> */}
+            </Route>
+            <Route path="/SongList">
+              <header className="App-header">
+                <div>
                   <Weather visible={this.state.visible} handleSubmit={(e, state) => {
                     this.weatherGet(state)
                   }} />
+                </div>
+                <div>
+                  <h1>Heavy Weather</h1>
+                </div>
+                <div>
+                </div>
+              </header>
+              <div style={{
+                height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center',
+                backgroundImage: `url(../${this.props.background})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'
+              }}>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
                   <ButtonGroup>
-                    <Button style={{backgroundColor: 'rgb(170, 172, 173)', borderColor: 'rgb(107, 110, 110 )', width: '50%'}} onClick={this.changeWeather}>Change Location</Button>
-                    <Button style={{backgroundColor: 'rgb(170, 172, 173)',  borderColor: 'rgb(107, 110, 110 )', width: '50%'}} onClick={this.newPlaylist}>New Playlist</Button>
+                    <Button style={{ backgroundColor: 'rgb(170, 172, 173)', borderColor: 'rgb(107, 110, 110 )', width: '50%' }} onClick={this.changeWeather}>Change Location</Button>
+                    <Button style={{ backgroundColor: 'rgb(170, 172, 173)', borderColor: 'rgb(107, 110, 110 )', width: '50%' }} onClick={this.newPlaylist}>New Playlist</Button>
                   </ButtonGroup>
                   <SongList variant="primary" size="sm" weatherGet={this.weatherGet} playlist={this.state.playlist} />
                 </div>
-              </Route>
-            </Switch>
-          </div>
+              </div>
+            </Route>
+          </Switch>
         </div>
       </Router>
     );

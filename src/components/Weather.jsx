@@ -34,7 +34,7 @@ class Weather extends Component {
                     <Dropdown.Toggle variant="success" id="dropdown-basic">
                         Location Entry
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
+                    <Dropdown.Menu style={{width: "50vw"}}>
                         <Form onSubmit={this.handleSubmit}>
                             <Form.Group>
                                 <FormControl
