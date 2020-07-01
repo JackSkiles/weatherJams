@@ -60,26 +60,6 @@ class App extends React.Component {
     }
   }
 
-  getNowPlaying() {
-    spotifyWebApi.getCategoryPlaylists("country")
-      .then((response) => {
-        console.log(response)
-        if (response) {
-          console.log(response)
-          const url = response.playlists.items[2].uri;
-          const uri = url.slice(17, url.length);
-          console.log(uri)
-          this.setState({
-            categories: `https://open.spotify.com/embed/playlist/${uri}`
-          })
-        } else {
-          this.setState({
-            categories: 'nothing'
-          });
-        }
-      })
-  }
-
   render() {
     return (
       <Router>
@@ -90,28 +70,25 @@ class App extends React.Component {
           }}>
             <Switch>
               <Route path="/" exact>
-                <div style={{ width: '30%', height: '35vh', backgroundColor: 'white', marginTop: '10px', borderRadius: '7px' }}>
-                  <Weather handleSubmit={(e, state) => {
-                    this.weatherGet(state)
-                  }} />
-
-                  <a href='http://localhost:8888'>
-                    <button>Login With Spotify</button>
-                  </a>
-                  <button onClick={() => this.getNowPlaying()}>
-                    Check Now Playing
-                  </button>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '30%', height: '35vh', backgroundColor: 'white', marginTop: '10px', borderRadius: '7px' }}>
+                  <div>
+                    <a href='http://localhost:8888'>
+                      <button>Login With Spotify</button>
+                    </a>
+                  </div>
                   {/* <h1>{ this.state.categories }</h1> */}
-                  <Link to="/SongList"><h3>To Songlist</h3></Link>
-                </div>
-                <div>
-                  <iframe src={this.state.categories}
-                  width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media">
-                  </iframe>
+                  <div>
+                    <Link to="/SongList"><h3>To Songlist</h3></Link>
+                  </div>
                 </div>
               </Route>
             </Switch>
             <Route path="/SongList">
+              <div style={{ display: 'flex', display: 'column', alignItems: 'center', justifyContent: 'center', width: '30%', height: '35vh', backgroundColor: 'white', marginTop: '10px', borderRadius: '7px' }}>
+                <Weather handleSubmit={(e, state) => {
+                  this.weatherGet(state)
+                }} />
+              </div>
               <SongList />
             </Route>
           </div>
