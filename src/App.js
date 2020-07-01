@@ -8,6 +8,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Spotify from 'spotify-web-api-js';
 import { connect } from 'react-redux';
 import { changeWeather } from './redux/actions';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const spotifyWebApi = new Spotify();
 
@@ -108,9 +111,12 @@ class App extends React.Component {
         break;
       default:
         this.getPlaylist("pop")
+      }
     }
-  }
-
+    
+    newPlaylist = () => {
+      this.playlistGet();
+    }
   changeWeather = () => {
     const visible = this.state.visible
     if(visible === 'visible'){
@@ -120,9 +126,6 @@ class App extends React.Component {
     }
   }
 
-  newPlaylist = () => {
-    this.playlistGet();
-  }
 
   render() {
     return (
@@ -148,9 +151,11 @@ class App extends React.Component {
                   <Weather visible={this.state.visible} handleSubmit={(e, state) => {
                     this.weatherGet(state)
                   }} />
-                  <button onClick={this.changeWeather}>Change Weather</button>
-                  <button onClick={this.newPlaylist}>New Playlist</button>
-                  <SongList weatherGet={this.weatherGet} playlist={this.state.playlist} />
+                  <ButtonGroup>
+                    <Button style={{backgroundColor: 'rgb(170, 172, 173)', borderColor: 'rgb(107, 110, 110 )', width: '50%'}} onClick={this.changeWeather}>Change Location</Button>
+                    <Button style={{backgroundColor: 'rgb(170, 172, 173)',  borderColor: 'rgb(107, 110, 110 )', width: '50%'}} onClick={this.newPlaylist}>New Playlist</Button>
+                  </ButtonGroup>
+                  <SongList variant="primary" size="sm" weatherGet={this.weatherGet} playlist={this.state.playlist} />
                 </div>
               </Route>
             </Switch>

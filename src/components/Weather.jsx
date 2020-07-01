@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import { Link, Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import FormControl from 'react-bootstrap/FormControl';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 class Weather extends Component {
     constructor(props) {
@@ -15,7 +20,7 @@ class Weather extends Component {
     }
 
     handleChange = (e) => {
-        this.setState({[e.target.name]: e.target.value});
+        this.setState({ [e.target.name]: e.target.value });
     }
 
     handleSubmit = (e) => {
@@ -24,29 +29,60 @@ class Weather extends Component {
     }
     render() {
         return (
-            <div style={{visibility: this.props.visible}}>
-                <form onSubmit={this.handleSubmit}>
-                    <h3>City:</h3>
-                    <input type="text" value={this.state.city} name="city" onChange={this.handleChange}></input>
-                    <h3>State:</h3>
-                    <input type="text" value={this.state.state} name="state" maxLength="2" onChange={this.handleChange}></input>
-                    <h3>Country:</h3>
-                    <input type="text" value={this.state.country} name="country" onChange={this.handleChange}></input>
-                    <button type="submit">Submit</button>
-                </form>
+            <Dropdown>
+            <div style={{ display: 'flex', justifyContent: 'center', visibility: this.props.visible }}>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                        Location Entry
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Form onSubmit={this.handleSubmit}>
+                            <Form.Group>
+                                <FormControl
+                                    value={this.state.city}
+                                    onChange={this.handleChange}
+                                    name="city"
+                                    placeholder="City"
+                                    aria-label="City"
+                                    aria-describedby="basic-addon1"
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                <FormControl
+                                    value={this.state.state}
+                                    onChange={this.handleChange}
+                                    name="state"
+                                    placeholder="State"
+                                    aria-label="State"
+                                    aria-describedby="basic-addon1"
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                <FormControl
+                                    value={this.state.country}
+                                    onChange={this.handleChange}
+                                    name="country"
+                                    placeholder="Country"
+                                    aria-label="Country"
+                                    aria-describedby="basic-addon1"
+                                />
+                            <Button style={{marginTop: '10px'}}type="submit">Submit</Button>
+                            </Form.Group>
+                        </Form>
+                    </Dropdown.Menu>
             </div>
+            </Dropdown>
         )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-      weather: state.weather,
-      background: state.background
+        weather: state.weather,
+        background: state.background
     }
-  }
-  
-  export default connect(
+}
+
+export default connect(
     mapStateToProps,
     null
-  )(Weather);
+)(Weather);
