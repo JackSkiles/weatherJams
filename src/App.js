@@ -5,7 +5,9 @@ import Weather from "./components/Weather";
 import SongList from "./components/SongList"
 import { Link } from "react-router-dom"
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Spotify from 'spotify-web-api-js'
+import Spotify from 'spotify-web-api-js';
+import { connect } from 'react-redux';
+import { changeWeather } from './redux/actions';
 
 const spotifyWebApi = new Spotify();
 
@@ -14,10 +16,12 @@ class App extends React.Component {
     super(props);
     const params = this.getHashParams()
     this.state = {
-      weather: "",
-      background: "url(./Clear.gif)",
+      // weather: "Clear",
+      // background: "url(./Clear.gif)",
       loggedInt: params.access_token ? true : false,
-      categories: []
+      categories: [],
+      playlist: [],
+      visible: 'visible'
     }
     if (params.access_token) {
       spotifyWebApi.setAccessToken(params.access_token)
@@ -42,60 +46,113 @@ class App extends React.Component {
         if (data.cod === "404") {
           alert('Please enter valid location');
         } else {
-          this.setState({ weather: data.weather[0].main, background: `url(./${data.weather[0].main}.gif)` });
+          this.props.changeWeather(data);
         }
       })
+    this.playlistGet()
+    this.setState({visible: 'hidden'});
   }
 
-  getSong = (e) => {
-    console.log("Hello")
-    if (this.state.weather === "Clouds") {
-      let num = 0;
-      while (num < 10) {
-        const randomNum = Math.floor(Math.random() * 3135556);
-        console.log(randomNum);
-        num++
-      }
-      fetch(`https://api.deezer.com/aa6dd1a30087eba6aba15aa1c92630b8/track/3135556`)
+  
+  getPlaylist(genre) {
+    spotifyWebApi.getCategoryPlaylists(genre)
+        .then((response) => {
+          console.log(response)
+          const playlistNum = this.getRandomInt(response.playlists.items.length);
+          if (response) {
+            console.log(response)
+            const url = response.playlists.items[playlistNum].uri;
+            const uri = url.slice(17, url.length);
+            console.log(uri)
+            this.setState({
+              playlist: `https://open.spotify.com/embed/playlist/${uri}`
+            })
+          } else {
+            this.setState({
+              playlist: 'nothing'
+            });
+          }
+        })
+  }
+
+  getRandomInt(max) {
+    return Math.floor(Math.random(0) * Math.floor(max));
+  }
+
+
+  componentDidMount() {
+    this.getPlaylist("pop");
+  }
+
+  playlistGet = () => {
+    const weather = this.props.weather;
+    switch(weather) {
+      case "Clear":
+        this.getPlaylist("pop");
+        break;
+      case "Clouds":
+        this.getPlaylist("chill");
+        break;
+      case "Drizzle":
+        this.getPlaylist("jazz");
+        break;
+      case "Rain":
+        this.getPlaylist("focus");
+        break;
+      case "Snow":
+        this.getPlaylist("sleep");
+        break;
+      case "Thunderstorm":
+        this.getPlaylist("rock");
+        break;
+      default:
+        this.getPlaylist("pop")
     }
   }
-
+  
+  
   render() {
     return (
       <Router>
         <div className="App">
-          <div style={{
-            height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center',
-            backgroundImage: this.state.background, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'
-          }}>
-            <Switch>
-              <Route path="/" exact>
-                <div className="card">
-                  <div>
-                    <Weather handleSubmit={(e, state) => {
-                      this.weatherGet(state)
-                    }} />
-                  <div>
-                    <a href='http://localhost:8888'>
-                      <button>Login With Spotify</button>
-                    </a>
-                  </div>
-                  </div>
-                  {/* <h1>{ this.state.categories }</h1> */}
-                  <div>
-                    <Link to="/SongList"><h3>To Songlist</h3></Link>
-                  </div>
+        <div style={{
+                height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center',
+                backgroundImage: `url(../${this.props.background})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'
+              }}>
+          <Switch>
+            <Route path="/" exact>
+              <div className="card">
+                <div>
+                  <a href='http://localhost:8888'>
+                    <button>Login With Spotify</button>
+                  </a>
                 </div>
-              </Route>
-              <Route path="/SongList">
-                <SongList />
+              </div>
+              {/* <h1>{ this.state.categories }</h1> */}
+            </Route>
+            <Route path="/SongList">
+                  <Weather visible={this.state.visible} handleSubmit={(e, state) => {
+                    this.weatherGet(state)
+                  }} />
+                <SongList weatherGet={this.weatherGet} playlist={this.state.playlist}/>
               </Route>
             </Switch>
           </div>
-        </div>
+          </div>
       </Router>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    weather: state.weather,
+    background: state.background
+  }
+}
+
+const mapDispatchToProps = {
+  changeWeather
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

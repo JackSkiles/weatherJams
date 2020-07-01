@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import { Link } from "react-router-dom";
-import { SongList } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from 'react-redux';
 
-export default class Weather extends Component {
+class Weather extends Component {
     constructor(props) {
         super(props);
 
@@ -11,7 +11,6 @@ export default class Weather extends Component {
             city: "Atlanta",
             state: "GA",
             country: "US",
-            songs: [],
         }
     }
 
@@ -21,11 +20,11 @@ export default class Weather extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.handleSubmit(e, this.state)
+        this.props.handleSubmit(e, this.state);
     }
     render() {
         return (
-            <div>
+            <div style={{visibility: this.props.visible}}>
                 <form onSubmit={this.handleSubmit}>
                     <h3>City:</h3>
                     <input type="text" value={this.state.city} name="city" onChange={this.handleChange}></input>
@@ -39,3 +38,15 @@ export default class Weather extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+      weather: state.weather,
+      background: state.background
+    }
+  }
+  
+  export default connect(
+    mapStateToProps,
+    null
+  )(Weather);
