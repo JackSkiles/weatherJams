@@ -15,13 +15,10 @@ class SongList extends React.Component {
  
   render() {
     return (
-      <div>
-        <div mount={() => this.componentDidMount()}>
-          Check Now Playing
-          </div>
+      <div  mount={() => this.componentDidMount()}>
         <div>
           <iframe src={this.props.playlist}
-            width="300" height="380" allow="encrypted-media">
+            style={{width: '70vh', height: '70vh'}} allow="encrypted-media">
           </iframe>
         </div>
       </div>

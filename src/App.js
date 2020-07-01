@@ -48,31 +48,32 @@ class App extends React.Component {
         } else {
           this.props.changeWeather(data);
         }
-      })
-    this.playlistGet()
-    this.setState({visible: 'hidden'});
+      }).then(
+        this.playlistGet()
+      )
+    this.setState({ visible: 'hidden' });
   }
 
-  
+
   getPlaylist(genre) {
     spotifyWebApi.getCategoryPlaylists(genre)
-        .then((response) => {
+      .then((response) => {
+        console.log(response)
+        const playlistNum = this.getRandomInt(response.playlists.items.length);
+        if (response) {
           console.log(response)
-          const playlistNum = this.getRandomInt(response.playlists.items.length);
-          if (response) {
-            console.log(response)
-            const url = response.playlists.items[playlistNum].uri;
-            const uri = url.slice(17, url.length);
-            console.log(uri)
-            this.setState({
-              playlist: `https://open.spotify.com/embed/playlist/${uri}`
-            })
-          } else {
-            this.setState({
-              playlist: 'nothing'
-            });
-          }
-        })
+          const url = response.playlists.items[playlistNum].uri;
+          const uri = url.slice(17, url.length);
+          console.log(uri)
+          this.setState({
+            playlist: `https://open.spotify.com/embed/playlist/${uri}`
+          })
+        } else {
+          this.setState({
+            playlist: 'nothing'
+          });
+        }
+      })
   }
 
   getRandomInt(max) {
@@ -86,7 +87,7 @@ class App extends React.Component {
 
   playlistGet = () => {
     const weather = this.props.weather;
-    switch(weather) {
+    switch (weather) {
       case "Clear":
         this.getPlaylist("pop");
         break;
@@ -109,36 +110,52 @@ class App extends React.Component {
         this.getPlaylist("pop")
     }
   }
-  
-  
+
+  changeWeather = () => {
+    const visible = this.state.visible
+    if(visible === 'visible'){
+      return null;
+    } else {
+      this.setState({visible: 'visible'})
+    }
+  }
+
+  newPlaylist = () => {
+    this.playlistGet();
+  }
+
   render() {
     return (
       <Router>
         <div className="App">
-        <div style={{
-                height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center',
-                backgroundImage: `url(../${this.props.background})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'
-              }}>
-          <Switch>
-            <Route path="/" exact>
-              <div className="card">
-                <div>
-                  <a href='http://localhost:8888'>
-                    <button>Login With Spotify</button>
-                  </a>
+          <div style={{
+            height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center',
+            backgroundImage: `url(../${this.props.background})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'
+          }}>
+            <Switch>
+              <Route path="/" exact>
+                <div className="card">
+                  <div>
+                    <a href='http://localhost:8888'>
+                      <button>Login With Spotify</button>
+                    </a>
+                  </div>
                 </div>
-              </div>
-              {/* <h1>{ this.state.categories }</h1> */}
-            </Route>
-            <Route path="/SongList">
+                {/* <h1>{ this.state.categories }</h1> */}
+              </Route>
+              <Route path="/SongList">
+                <div style={{display: 'flex', flexDirection: 'column'}}>
                   <Weather visible={this.state.visible} handleSubmit={(e, state) => {
                     this.weatherGet(state)
                   }} />
-                <SongList weatherGet={this.weatherGet} playlist={this.state.playlist}/>
+                  <button onClick={this.changeWeather}>Change Weather</button>
+                  <button onClick={this.newPlaylist}>New Playlist</button>
+                  <SongList weatherGet={this.weatherGet} playlist={this.state.playlist} />
+                </div>
               </Route>
             </Switch>
           </div>
-          </div>
+        </div>
       </Router>
     );
   }
