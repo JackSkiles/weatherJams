@@ -78,7 +78,7 @@ class SongList extends React.Component {
       <div  mount={() => this.componentDidMount()}>
         <div>
           <iframe src={this.props.playlist}
-            style={{width: '70vh', height: '70vh'}} allow="encrypted-media">
+            style={{width: '100%', height: '60vh'}} allow="encrypted-media">
           </iframe>
         </div>
       </div>

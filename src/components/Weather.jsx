@@ -31,7 +31,7 @@ class Weather extends Component {
         return (
             <Dropdown>
             <div style={{ display: 'flex', justifyContent: 'center', visibility: this.props.visible }}>
-                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    <Dropdown.Toggle variant="success" id="dropdown-basic" style={{ backgroundColor: 'blue'}}>
                         Location Entry
                     </Dropdown.Toggle>
                     <Dropdown.Menu style={{width: "50vw"}}>

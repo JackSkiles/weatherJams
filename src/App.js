@@ -117,15 +117,7 @@ class App extends React.Component {
   newPlaylist = () => {
     this.playlistGet();
   }
-  changeWeather = () => {
-    const visible = this.state.visible
-    if (visible === 'visible') {
-      return null;
-    } else {
-      this.setState({ visible: 'visible' })
-    }
-  }
-
+ 
 
   render() {
     return (
@@ -148,28 +140,34 @@ class App extends React.Component {
               {/* <h1>{ this.state.categories }</h1> */}
             </Route>
             <Route path="/SongList">
-              <header className="App-header">
-                <div>
-                  <Weather visible={this.state.visible} handleSubmit={(e, state) => {
-                    this.weatherGet(state)
-                  }} />
-                </div>
-                <div>
-                  <h1>Heavy Weather</h1>
-                </div>
-                <div>
-                </div>
-              </header>
               <div style={{
-                height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center',
+                height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'space-between',
                 backgroundImage: `url(../${this.props.background})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'
               }}>
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                  <ButtonGroup>
-                    <Button style={{ backgroundColor: 'rgb(170, 172, 173)', borderColor: 'rgb(107, 110, 110 )', width: '50%' }} onClick={this.changeWeather}>Change Location</Button>
-                    <Button style={{ backgroundColor: 'rgb(170, 172, 173)', borderColor: 'rgb(107, 110, 110 )', width: '50%' }} onClick={this.newPlaylist}>New Playlist</Button>
-                  </ButtonGroup>
-                  <SongList variant="primary" size="sm" weatherGet={this.weatherGet} playlist={this.state.playlist} />
+                <div>
+                  <header className="App-header">
+                    <div className="title">
+                      <div>
+                        <h1>Heavy Weather</h1>
+                      </div>
+                      <div className="Title">
+                        <Weather handleSubmit={(e, state) => {
+                          this.weatherGet(state)
+                        }} />
+                      </div>
+                    </div>
+                  </header>
+                </div>
+                <div style={{display: 'flex', justifyContent: 'center'}}>
+                  <div style={{ display: 'flex', flexDirection: 'column', width: '40%'}}>
+                    <ButtonGroup>
+                      <Button style={{ backgroundColor: 'rgb(170, 172, 173)', borderColor: 'rgb(107, 110, 110 )' }} onClick={this.newPlaylist}>New Playlist</Button>
+                    </ButtonGroup>
+                    <SongList variant="primary" size="sm" weatherGet={this.weatherGet} playlist={this.state.playlist} />
+                  </div>
+                </div>
+                <div>
+                  
                 </div>
               </div>
             </Route>

@@ -19,14 +19,21 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  background-color: #d6d6d6;
+  background-image: linear-gradient(to bottom,rgba(0,0,0,.8) 10%,rgba(0,0,0,0));
   display: flex;
-  justify-content: space-around; 
+  justify-content: flex-start; 
   align-items: center;
   height: 8vh;
   font-size: calc(10px + 2vmin);
 }
 
+.title{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 25%;
+
+}
 .App-link {
   color: #61dafb;
 }
