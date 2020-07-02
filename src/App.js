@@ -139,7 +139,7 @@ class App extends React.Component {
               }}>
                 <div className="card">
                   <div>
-                    <a href='http://localhost:8888'>
+                    <a href='/login'>
                       <button>Login With Spotify</button>
                     </a>
                   </div>
