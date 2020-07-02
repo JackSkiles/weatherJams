@@ -146,9 +146,9 @@ class App extends React.Component {
               }}>
                 <div>
                   <header className="App-header">
-                    <div className="title">
-                      <div>
-                        <h1>Heavy Weather</h1>
+                    <div className="titleCont">
+                      <div className="title">
+                        <h1 className="h1Text">Heavy Weather</h1>
                       </div>
                       <div className="Title">
                         <Weather handleSubmit={(e, state) => {
@@ -161,13 +161,13 @@ class App extends React.Component {
                 <div style={{display: 'flex', justifyContent: 'center'}}>
                   <div style={{ display: 'flex', flexDirection: 'column', width: '40%'}}>
                     <ButtonGroup>
-                      <Button style={{ backgroundColor: 'rgb(170, 172, 173)', borderColor: 'rgb(107, 110, 110 )' }} onClick={this.newPlaylist}>New Playlist</Button>
+                      <Button style={{ backgroundColor: 'rgba(162, 241, 255 )', border: 'none' }} onClick={this.newPlaylist}>New Playlist</Button>
                     </ButtonGroup>
                     <SongList variant="primary" size="sm" weatherGet={this.weatherGet} playlist={this.state.playlist} />
                   </div>
                 </div>
                 <div>
-                  
+
                 </div>
               </div>
             </Route>

@@ -27,13 +27,27 @@
   font-size: calc(10px + 2vmin);
 }
 
-.title{
+.titleCont{
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 25%;
 
 }
+
+.title {
+  margin: 5px;
+  padding-top: 8px;
+  width: 17vw;
+  border-radius: 1px;
+  background-color: whitesmoke;
+}
+
+.h1Text {
+  font-family: 'Arial', Helvetica, sans-serif;
+  color: rgb(27, 27, 27)
+}
+
 .App-link {
   color: #61dafb;
 }
