@@ -150,7 +150,7 @@ class App extends React.Component {
                       <div className="title">
                         <h1 className="h1Text">Heavy Weather</h1>
                       </div>
-                      <div className="Title">
+                      <div>
                         <Weather handleSubmit={(e, state) => {
                           this.weatherGet(state)
                         }} />
