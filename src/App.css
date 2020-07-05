@@ -1,3 +1,32 @@
+*{
+  box-sizing: border-box;
+}
+
+body{
+ overflow-x: hidden;
+}
+
+.v-header{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  color: whitesmoke;
+}
+
+.container{
+  max-width: 960px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin: auto;
+  text-align: center;
+}
+
+.fullscreen-video-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .App {
   text-align: center;
 }
@@ -35,6 +64,14 @@
   height: 100%;
 }
 
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
 .title {
   display: flex;
   align-items: center;
@@ -58,14 +95,10 @@
 }
 
 .card { 
-  display: 'flex';
-  align-items: 'center'; 
-  justify-content: 'center';
-  width: '30%';
-  height: '35vh';
-  background-color: 'white';
-  margin-top: '10px'; 
-  border-radius: '7px';
+  position: fixed;
+  position: absolute;
+  top: 600px;
+  right: 850px; 
  }
 
  @media screen and (max-height: 500px) {

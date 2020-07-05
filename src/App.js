@@ -125,10 +125,8 @@ class App extends React.Component {
         <div className="App">
           <Switch>
             <Route path="/" exact>
-              <div style={{
-                height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center',
-                backgroundImage: `url(../${this.props.background})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'
-              }}>
+              <video src={this.props.background} autoPlay="true" loop="true" muted="true"></video>
+              <div>
                 <div className="card">
                   <div>
                     <a href='/login'>
