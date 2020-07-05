@@ -118,6 +118,9 @@ class App extends React.Component {
     this.playlistGet();
   }
  
+  customPlaylist = (e) => {
+    this.getPlaylist(e.target.name);
+  }
 
   render() {
     return (
@@ -155,7 +158,11 @@ class App extends React.Component {
                 <div style={{position: 'absolute', top: '200px', left: '690px', width: '65vw'}}>
                   <div style={{ display: 'flex', flexDirection: 'column', width: '40%'}}>
                     <ButtonGroup>
-                      <Button style={{ backgroundColor: 'rgba(162, 241, 255 )', border: 'none' }} onClick={this.newPlaylist}>New Playlist</Button>
+                      <Button style={{ backgroundColor: 'rgba(162, 241, 255 )', border: '1px solid rgba(99, 224, 247)' }} onClick={this.newPlaylist}>Weather Playlist</Button>
+                      <Button name="decades" style={{ backgroundColor: 'rgba(162, 241, 255 )', border: '1px solid rgba(99, 224, 247)' }} onClick={this.customPlaylist}>Decades</Button>
+                      <Button name="summer" style={{ backgroundColor: 'rgba(162, 241, 255 )', border: '1px solid rgba(99, 224, 247)' }} onClick={this.customPlaylist}>Summer</Button>
+                      <Button name="r&b" style={{ backgroundColor: 'rgba(162, 241, 255 )', border: '1px solid rgba(99, 224, 247)' }} onClick={this.customPlaylist}>R&B</Button>
+                      <Button name="gaming" style={{ backgroundColor: 'rgba(162, 241, 255 )', border: '1px solid rgba(99, 224, 247)' }} onClick={this.customPlaylist}>Gaming</Button>
                     </ButtonGroup>
                     <SongList variant="primary" size="sm" weatherGet={this.weatherGet} playlist={this.state.playlist} />
                   </div>
