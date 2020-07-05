@@ -140,7 +140,7 @@ class App extends React.Component {
             <Route path="/SongList">
               <div style={{
                 height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'space-between',
-                backgroundImage: `url(../${this.props.background})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'
+                backgroundImage: `../Clear.mp4`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'
               }}>
                 <div>
                   <header className="App-header">
