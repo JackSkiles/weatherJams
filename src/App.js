@@ -138,10 +138,7 @@ class App extends React.Component {
               {/* <h1>{ this.state.categories }</h1> */}
             </Route>
             <Route path="/SongList">
-              <div style={{
-                height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'space-between',
-                backgroundImage: `../Clear.mp4`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'
-              }}>
+            <video src={`../${this.props.background}`} autoPlay="true" loop="true" muted="true"></video>
                 <div>
                   <header className="App-header">
                     <div className="titleCont">
@@ -155,8 +152,7 @@ class App extends React.Component {
                       </div>
                     </div>
                   </header>
-                </div>
-                <div style={{display: 'flex', justifyContent: 'center'}}>
+                <div style={{position: 'absolute', top: '200px', left: '690px', width: '65vw'}}>
                   <div style={{ display: 'flex', flexDirection: 'column', width: '40%'}}>
                     <ButtonGroup>
                       <Button style={{ backgroundColor: 'rgba(162, 241, 255 )', border: 'none' }} onClick={this.newPlaylist}>New Playlist</Button>
