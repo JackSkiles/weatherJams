@@ -24,7 +24,8 @@ class App extends React.Component {
       loggedInt: params.access_token ? true : false,
       categories: [],
       playlist: [],
-      visible: 'visible'
+      visible: 'visible',
+      mood: 'cheerful'
     }
     if (params.access_token) {
       spotifyWebApi.setAccessToken(params.access_token)
@@ -92,24 +93,32 @@ class App extends React.Component {
     const weather = this.props.weather;
     switch (weather) {
       case "Clear":
+        this.setState({mood: 'Cheerful'})
         this.getPlaylist("pop");
         break;
       case "Clouds":
+        this.setState({mood: 'Chill'})
         this.getPlaylist("chill");
         break;
       case "Drizzle":
+        this.setState({mood: 'Laid back'})
         this.getPlaylist("jazz");
         break;
       case "Rain":
+        console.log(this.props.icon)
+        this.setState({mood: 'Focused'})
         this.getPlaylist("focus");
         break;
       case "Snow":
+        this.setState({mood: 'Relaxed'})
         this.getPlaylist("sleep");
         break;
       case "Thunderstorm":
+        this.setState({mood: 'Hype'})
         this.getPlaylist("rock");
         break;
       default:
+        this.setState({mood: 'Cheerful'})
         this.getPlaylist("pop")
     }
   }
@@ -133,7 +142,7 @@ class App extends React.Component {
                 <div className="card">
                   <div>
                     <a href='/login'>
-                      <button>Login With Spotify</button>
+                      <Button>Login With Spotify</Button>
                     </a>
                   </div>
                 </div>
@@ -157,12 +166,13 @@ class App extends React.Component {
                       </div>
                       <div className ="whiteSpace"></div>
                       <div className="whiteSpace">
-                        <img src="../Sunny.png"></img>
+                        <img src={this.props.icon} className="img" ></img>
                       </div>
                     </div>
                   </header>
-                <div style={{position: 'absolute', top: '200px', left: '690px', width: '65vw'}}>
-                  <div style={{ display: 'flex', flexDirection: 'column', width: '40%'}}>
+                <div classNam="playlist" style={{position: 'absolute', top: '30%', left: '35%', width: '65vw'}}>
+                  <div style={{ display: 'flex', flexDirection: 'column', flexWrap: 'wrap', width: '50%'}}>
+                    <h3>Mood: {this.state.mood}</h3>
                     <ButtonGroup>
                       <Button style={{ backgroundColor: 'rgba(162, 241, 255, .7)', border: '1px solid rgba(99, 224, 247)' }} onClick={this.newPlaylist}>Weather Playlist</Button>
                       <Button name="decades" style={{ backgroundColor: 'rgba(162, 241, 255, .7)', border: '1px solid rgba(99, 224, 247)' }} onClick={this.customPlaylist}>Decades</Button>
