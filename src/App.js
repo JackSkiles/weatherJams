@@ -94,32 +94,32 @@ class App extends React.Component {
     const weather = this.props.weather;
     switch (weather) {
       case "Clear":
-        this.setState({mood: 'Cheerful'})
+        this.setState({ mood: 'Cheerful' })
         this.getPlaylist("pop");
         break;
       case "Clouds":
-        this.setState({mood: 'Chill'})
+        this.setState({ mood: 'Chill' })
         this.getPlaylist("chill");
         break;
       case "Drizzle":
-        this.setState({mood: 'Laid back'})
+        this.setState({ mood: 'Laid back' })
         this.getPlaylist("jazz");
         break;
       case "Rain":
         console.log(this.props.icon)
-        this.setState({mood: 'Focused'})
+        this.setState({ mood: 'Focused' })
         this.getPlaylist("focus");
         break;
       case "Snow":
-        this.setState({mood: 'Relaxed'})
+        this.setState({ mood: 'Relaxed' })
         this.getPlaylist("sleep");
         break;
       case "Thunderstorm":
-        this.setState({mood: 'Hype'})
+        this.setState({ mood: 'Hype' })
         this.getPlaylist("rock");
         break;
       default:
-        this.setState({mood: 'Cheerful'})
+        this.setState({ mood: 'Cheerful' })
         this.getPlaylist("pop")
     }
   }
@@ -127,19 +127,23 @@ class App extends React.Component {
   newPlaylist = () => {
     this.playlistGet();
   }
- 
+
   customPlaylist = (e) => {
     this.getPlaylist(e.target.name);
   }
 
   konamiCode = (e) => {
-    this.setState({code: e.target.value})
+    this.setState({ code: e.target.value })
   }
 
   render() {
     return (
       <Router>
-        <div aria-nv-el aria-nv-el-current className="App" onChange={this.konamiCode}>
+        <head>
+          <meta property="og:title" content="__OG_TITLE__" />
+          <meta property="og:description" content="__OG_DESCRIPTION__" />
+        </head>
+        <div className="App">
           <Switch>
             <Route path="/" exact>
               <video src={this.props.background} autoPlay="true" loop="true" muted="true"></video>
@@ -155,29 +159,29 @@ class App extends React.Component {
               {/* <h1>{ this.state.categories }</h1> */}
             </Route>
             <Route path="/SongList">
-            <video src={`../${this.props.background}`} autoPlay="true" loop="true" muted="true"></video>
-                <div>
-                  <header className="App-header">
-                    <div className="container">
-                      <div className="titleCont">
-                        <div className="title">
-                          <h1 className="h1Text">Heavy Weather</h1>
-                        </div>
-                        <div>
-                          <Weather handleSubmit={(e, state) => {
-                            this.weatherGet(state)
-                          }} />
-                        </div>
+              <video src={`../${this.props.background}`} autoPlay="true" loop="true" muted="true"></video>
+              <div aria-nv-el aria-nv-el-current onChange={this.konamiCode}>
+                <header className="App-header">
+                  <div className="container">
+                    <div className="titleCont">
+                      <div className="title">
+                        <h1 className="h1Text">Heavy Weather</h1>
                       </div>
-                      <div className ="whiteSpace"></div>
-                      <div className="whiteSpace">
-                        <img src={this.props.icon} className="img" ></img>
+                      <div>
+                        <Weather handleSubmit={(e, state) => {
+                          this.weatherGet(state)
+                        }} />
                       </div>
                     </div>
-                  </header>
-                <div classNam="playlist" style={{position: 'absolute', top: '30%', left: '35%', width: '65vw'}}>
-                  <div style={{ display: 'flex', flexDirection: 'column', flexWrap: 'wrap', width: '50%'}}>
-                    <h3>Mood: {this.state.mood}</h3>
+                    <div className="whiteSpace"></div>
+                    <div className="whiteSpace">
+                      <img src={this.props.icon} className="img" ></img>
+                    </div>
+                  </div>
+                </header>
+                <div classNam="playlist" style={{ position: 'absolute', top: '25%', left: '35%', width: '65vw' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', flexWrap: 'wrap', width: '50%' }}>
+                    <h3 style={{ color: 'white' }}>Mood: {this.state.mood}</h3>
                     <ButtonGroup>
                       <Button style={{ backgroundColor: 'rgba(162, 241, 255, .7)', border: '1px solid rgba(99, 224, 247)' }} onClick={this.newPlaylist}>Weather Playlist</Button>
                       <Button name="decades" style={{ backgroundColor: 'rgba(162, 241, 255, .7)', border: '1px solid rgba(99, 224, 247)' }} onClick={this.customPlaylist}>Decades</Button>
