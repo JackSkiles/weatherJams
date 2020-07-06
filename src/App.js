@@ -25,7 +25,8 @@ class App extends React.Component {
       categories: [],
       playlist: [],
       visible: 'visible',
-      mood: 'cheerful'
+      mood: 'cheerful',
+      code: ''
     }
     if (params.access_token) {
       spotifyWebApi.setAccessToken(params.access_token)
@@ -131,10 +132,14 @@ class App extends React.Component {
     this.getPlaylist(e.target.name);
   }
 
+  konamiCode = (e) => {
+    this.setState({code: e.target.value})
+  }
+
   render() {
     return (
       <Router>
-        <div className="App">
+        <div className="App" onChange={this.konamiCode}>
           <Switch>
             <Route path="/" exact>
               <video src={this.props.background} autoPlay="true" loop="true" muted="true"></video>
