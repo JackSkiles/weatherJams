@@ -18,3 +18,8 @@ After login you are taken to the music page.
 
 Here you are able to change your location to get different weather backgrounds and info. When you do this the playlist will also change genres according to the weather type.
 
+<img width="960" alt="chrome_OsuCrZgWDQ" src="https://user-images.githubusercontent.com/62663652/86628079-58dbfb00-bf97-11ea-917f-bb303e34edcb.png">
+
+Enter Location
+
+
