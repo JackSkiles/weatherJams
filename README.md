@@ -22,4 +22,9 @@ Here you are able to change your location to get different weather backgrounds a
 
 Enter Location
 
+<img width="960" alt="chrome_N9CDDexbtg" src="https://user-images.githubusercontent.com/62663652/86628128-73ae6f80-bf97-11ea-9d9b-62eb23eac0c8.png">
+
+And the weather icon, mood, background and playlist will all change. You can also pick from a few default genres or click on weather playlist to get a random playlist in the weather genre. 
+
+## Enjoy!
 
