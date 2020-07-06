@@ -60,7 +60,7 @@ body{
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 40%;
+  width: 60%;
   height: 100%;
 }
 
@@ -100,6 +100,20 @@ body{
   position: absolute;
   top: 600px;
   right: 850px; 
+ }
+
+ .container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+
+ img {
+   height: 90%;
+ }
+
+ .whiteSpace {
+   width: 40%;
  }
 
  @media screen and (max-height: 500px) {
