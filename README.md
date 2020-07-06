@@ -14,3 +14,7 @@ After this you are taken to the Spotify login page. Enter your email and passwor
 
 After login you are taken to the music page. 
 
+<img width="960" alt="chrome_Rh3wh07aPh" src="https://user-images.githubusercontent.com/62663652/86627936-1a464080-bf97-11ea-839a-d0809dea2647.png">
+
+Here you are able to change your location to get different weather backgrounds and info. When you do this the playlist will also change genres according to the weather type.
+
