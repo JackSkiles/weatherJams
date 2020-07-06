@@ -139,7 +139,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <div className="App" onChange={this.konamiCode}>
+        <div aria-nv-el aria-nv-el-current className="App" onChange={this.konamiCode}>
           <Switch>
             <Route path="/" exact>
               <video src={this.props.background} autoPlay="true" loop="true" muted="true"></video>
@@ -203,7 +203,8 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
   return {
     weather: state.weather,
-    background: state.background
+    background: state.background,
+    icon: state.icon
   }
 }
 
